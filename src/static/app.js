@@ -569,6 +569,20 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
       </div>
+      <div class="share-buttons">
+        <button class="share-button twitter" data-activity="${name}" data-platform="twitter" title="Share on Twitter">
+          𝕏
+        </button>
+        <button class="share-button facebook" data-activity="${name}" data-platform="facebook" title="Share on Facebook">
+          f
+        </button>
+        <button class="share-button linkedin" data-activity="${name}" data-platform="linkedin" title="Share on LinkedIn">
+          in
+        </button>
+        <button class="share-button email" data-activity="${name}" data-platform="email" title="Share via Email">
+          ✉
+        </button>
+      </div>
     `;
 
     // Add click handlers for delete buttons
@@ -586,6 +600,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
+
+    // Add click handlers for share buttons
+    const shareButtons = activityCard.querySelectorAll(".share-button");
+    shareButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const activityName = button.dataset.activity;
+        const platform = button.dataset.platform;
+        shareActivity(activityName, details, platform);
+      });
+    });
 
     activitiesList.appendChild(activityCard);
   }
@@ -809,6 +833,37 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       messageDiv.classList.add("hidden");
     }, 5000);
+  }
+
+  // Share activity function
+  function shareActivity(activityName, details, platform) {
+    const activityUrl = window.location.href;
+    const activityType = getActivityType(activityName, details.description);
+    const formattedSchedule = formatSchedule(details);
+    
+    const shareText = `Check out "${activityName}" at Mergington High School! ${details.description} - ${formattedSchedule}`;
+    const shareTitle = `${activityName} - Mergington High School`;
+    
+    let shareUrl = "";
+    
+    switch (platform) {
+      case "twitter":
+        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(activityUrl)}`;
+        break;
+      case "facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(activityUrl)}&quote=${encodeURIComponent(shareText)}`;
+        break;
+      case "linkedin":
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(activityUrl)}`;
+        break;
+      case "email":
+        shareUrl = `mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(shareText + "\n\n" + activityUrl)}`;
+        break;
+    }
+    
+    if (shareUrl) {
+      window.open(shareUrl, "_blank", "width=600,height=400");
+    }
   }
 
   // Handle form submission
