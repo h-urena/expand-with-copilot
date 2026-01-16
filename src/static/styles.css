@@ -208,7 +208,7 @@ section h3 {
 /* Difficulty Badge */
 .difficulty-badge {
   position: absolute;
-  top: 30px;
+  top: 32px;
   right: 8px;
   font-size: 0.65rem;
   font-weight: bold;

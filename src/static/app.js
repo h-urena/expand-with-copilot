@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let searchQuery = "";
   let currentDay = "";
   let currentTimeRange = "";
-  let currentDifficulty = null; // null = show all, "" = show only no-difficulty, "Beginner/etc" = show that level
+  // Difficulty filter states: null = show all, "" = show only activities without difficulty, "Beginner/Intermediate/Advanced" = show specific level
+  let currentDifficulty = null;
 
   // Authentication state
   let currentUser = null;
@@ -532,7 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Create difficulty badge if difficulty is specified
     const difficultyBadge = details.difficulty
-      ? `<span class="difficulty-badge difficulty-${details.difficulty.toLowerCase()}">${details.difficulty}</span>`
+      ? `<span class="difficulty-badge difficulty-${details.difficulty.toLowerCase().replace(/\s+/g, '-')}">${details.difficulty}</span>`
       : "";
 
     // Create capacity indicator
