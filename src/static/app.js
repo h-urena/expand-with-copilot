@@ -1,4 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Dark mode functionality
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  const darkModeIcon = document.getElementById("dark-mode-icon");
+
+  // Check for saved dark mode preference
+  function initializeDarkMode() {
+    if (!darkModeToggle || !darkModeIcon) return;
+    
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-mode");
+      darkModeIcon.textContent = "☀️";
+    } else {
+      darkModeIcon.textContent = "🌙";
+    }
+  }
+
+  // Toggle dark mode
+  function toggleDarkMode() {
+    if (!darkModeToggle || !darkModeIcon) return;
+    
+    document.body.classList.toggle("dark-mode");
+    const isDarkMode = document.body.classList.contains("dark-mode");
+    
+    // Update icon
+    darkModeIcon.textContent = isDarkMode ? "☀️" : "🌙";
+    
+    // Save preference
+    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+  }
+
+  // Add event listener
+  if (darkModeToggle && darkModeIcon) {
+    darkModeToggle.addEventListener("click", toggleDarkMode);
+    // Initialize dark mode on page load
+    initializeDarkMode();
+  }
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
@@ -911,6 +949,47 @@ document.addEventListener("DOMContentLoaded", () => {
     setDayFilter,
     setTimeRangeFilter,
   };
+
+  // Share widget functionality
+  const shareWidgetButtons = document.querySelectorAll(".share-widget-button");
+  
+  shareWidgetButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const platform = button.dataset.platform;
+      shareWebsite(platform);
+    });
+  });
+
+  function shareWebsite(platform) {
+    const pageUrl = window.location.href;
+    const pageTitle = "Mergington High School - Extracurricular Activities";
+    const shareText = "Check out the amazing extracurricular activities at Mergington High School! Find sports, arts, academic clubs, and more.";
+    
+    let shareUrl = "";
+    
+    switch (platform) {
+      case "twitter":
+        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}`;
+        break;
+      case "facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}&quote=${encodeURIComponent(shareText)}`;
+        break;
+      case "linkedin":
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`;
+        break;
+      case "email":
+        shareUrl = `mailto:?subject=${encodeURIComponent(pageTitle)}&body=${encodeURIComponent(shareText + "\n\n" + pageUrl)}`;
+        break;
+    }
+    
+    if (shareUrl) {
+      if (platform === "email") {
+        window.location.href = shareUrl;
+      } else {
+        window.open(shareUrl, "_blank", "width=600,height=400");
+      }
+    }
+  }
 
   // Initialize app
   checkAuthentication();
