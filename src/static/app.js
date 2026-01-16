@@ -569,20 +569,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
       </div>
-      <div class="share-buttons">
-        <button class="share-button twitter" data-activity="${name}" data-platform="twitter" title="Share on Twitter" aria-label="Share on X (formerly Twitter)">
-          𝕏
-        </button>
-        <button class="share-button facebook" data-activity="${name}" data-platform="facebook" title="Share on Facebook" aria-label="Share on Facebook">
-          f
-        </button>
-        <button class="share-button linkedin" data-activity="${name}" data-platform="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
-          in
-        </button>
-        <button class="share-button email" data-activity="${name}" data-platform="email" title="Share via Email" aria-label="Share via Email">
-          ✉
-        </button>
-      </div>
     `;
 
     // Add click handlers for delete buttons
@@ -600,16 +586,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
-
-    // Add click handlers for share buttons
-    const shareButtons = activityCard.querySelectorAll(".share-button");
-    shareButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const activityName = button.dataset.activity;
-        const platform = button.dataset.platform;
-        shareActivity(activityName, details, platform);
-      });
-    });
 
     activitiesList.appendChild(activityCard);
   }
@@ -835,40 +811,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 5000);
   }
 
-  // Share activity function
-  function shareActivity(activityName, details, platform) {
-    const activityUrl = window.location.href;
-    const formattedSchedule = formatSchedule(details);
-    
-    const shareText = `Check out "${activityName}" at Mergington High School! ${details.description} - ${formattedSchedule}`;
-    const shareTitle = `${activityName} - Mergington High School`;
-    
-    let shareUrl = "";
-    
-    switch (platform) {
-      case "twitter":
-        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(activityUrl)}`;
-        break;
-      case "facebook":
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(activityUrl)}&quote=${encodeURIComponent(shareText)}`;
-        break;
-      case "linkedin":
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(activityUrl)}`;
-        break;
-      case "email":
-        shareUrl = `mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(shareText + "\n\n" + activityUrl)}`;
-        break;
-    }
-    
-    if (shareUrl) {
-      if (platform === "email") {
-        window.location.href = shareUrl;
-      } else {
-        window.open(shareUrl, "_blank", "width=600,height=400");
-      }
-    }
-  }
-
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -918,6 +860,47 @@ document.addEventListener("DOMContentLoaded", () => {
     setDayFilter,
     setTimeRangeFilter,
   };
+
+  // Share widget functionality
+  const shareWidgetButtons = document.querySelectorAll(".share-widget-button");
+  
+  shareWidgetButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const platform = button.dataset.platform;
+      shareWebsite(platform);
+    });
+  });
+
+  function shareWebsite(platform) {
+    const pageUrl = window.location.href;
+    const pageTitle = "Mergington High School - Extracurricular Activities";
+    const shareText = "Check out the amazing extracurricular activities at Mergington High School! Find sports, arts, academic clubs, and more.";
+    
+    let shareUrl = "";
+    
+    switch (platform) {
+      case "twitter":
+        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}`;
+        break;
+      case "facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}&quote=${encodeURIComponent(shareText)}`;
+        break;
+      case "linkedin":
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`;
+        break;
+      case "email":
+        shareUrl = `mailto:?subject=${encodeURIComponent(pageTitle)}&body=${encodeURIComponent(shareText + "\n\n" + pageUrl)}`;
+        break;
+    }
+    
+    if (shareUrl) {
+      if (platform === "email") {
+        window.location.href = shareUrl;
+      } else {
+        window.open(shareUrl, "_blank", "width=600,height=400");
+      }
+    }
+  }
 
   // Initialize app
   checkAuthentication();
