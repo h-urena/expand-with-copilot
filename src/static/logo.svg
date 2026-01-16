@@ -1,60 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <title>Mergington High School Activities Logo</title>
-  <!-- Background circle -->
-  <circle cx="100" cy="100" r="95" fill="#ffffff" stroke="#ff6f00" stroke-width="3"/>
+  <defs>
+    <linearGradient id="gradientBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#534bae;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a237e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradientOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffa040;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6f00;stop-opacity:1" />
+    </linearGradient>
+  </defs>
   
-  <!-- School building base (representing academic foundation) -->
-  <rect x="70" y="110" width="60" height="50" fill="#1a237e"/>
-  <rect x="80" y="120" width="10" height="10" fill="#ffa040"/>
-  <rect x="90" y="120" width="10" height="10" fill="#ffa040"/>
-  <rect x="100" y="120" width="10" height="10" fill="#ffa040"/>
-  <rect x="110" y="120" width="10" height="10" fill="#ffa040"/>
-  <rect x="80" y="135" width="10" height="10" fill="#ffa040"/>
-  <rect x="90" y="135" width="10" height="10" fill="#ffa040"/>
-  <rect x="100" y="135" width="10" height="10" fill="#ffa040"/>
-  <rect x="110" y="135" width="10" height="10" fill="#ffa040"/>
-  <rect x="93" y="150" width="14" height="10" fill="#534bae"/>
+  <!-- Modern shield background -->
+  <path d="M 100 20 L 160 45 L 160 110 Q 160 160 100 180 Q 40 160 40 110 L 40 45 Z" 
+        fill="url(#gradientBlue)" stroke="none"/>
   
-  <!-- Roof/Triangle top -->
-  <path d="M 65 110 L 100 85 L 135 110 Z" fill="#ff6f00"/>
+  <!-- Stylized letter M -->
+  <path d="M 60 70 L 70 70 L 85 95 L 100 70 L 115 95 L 130 70 L 140 70 L 140 130 L 130 130 L 130 90 L 115 115 L 100 90 L 85 115 L 70 90 L 70 130 L 60 130 Z" 
+        fill="#ffffff" stroke="none"/>
   
-  <!-- Flag on top (representing achievement) -->
-  <line x1="100" y1="85" x2="100" y2="65" stroke="#ff6f00" stroke-width="2"/>
-  <path d="M 100 65 L 115 70 L 100 75 Z" fill="#ff6f00"/>
+  <!-- Modern accent arc at top -->
+  <path d="M 70 45 Q 100 35 130 45" 
+        stroke="url(#gradientOrange)" stroke-width="4" fill="none" stroke-linecap="round"/>
   
-  <!-- Four activity icons in corners -->
+  <!-- Three modern dots representing diverse activities -->
+  <circle cx="85" cy="150" r="5" fill="#ffa040"/>
+  <circle cx="100" cy="155" r="5" fill="#ff6f00"/>
+  <circle cx="115" cy="150" r="5" fill="#ffa040"/>
   
-  <!-- Top Left: Sports (Basketball) -->
-  <circle cx="40" cy="40" r="15" fill="none" stroke="#1a237e" stroke-width="2"/>
-  <path d="M 40 25 L 40 55 M 25 40 L 55 40 M 30 30 Q 40 35 50 30 M 30 50 Q 40 45 50 50" 
-        stroke="#1a237e" stroke-width="1.5" fill="none"/>
-  
-  <!-- Top Right: Arts (Palette) -->
-  <ellipse cx="160" cy="40" rx="13" ry="15" fill="none" stroke="#1a237e" stroke-width="2"/>
-  <circle cx="155" cy="35" r="3" fill="#ff6f00"/>
-  <circle cx="165" cy="35" r="3" fill="#534bae"/>
-  <circle cx="155" cy="45" r="3" fill="#2e7d32"/>
-  <circle cx="165" cy="45" r="3" fill="#c62828"/>
-  <circle cx="170" cy="48" r="2" fill="#1a237e"/>
-  
-  <!-- Bottom Left: Technology (Gear) -->
-  <circle cx="40" cy="160" r="12" fill="none" stroke="#1a237e" stroke-width="2"/>
-  <circle cx="40" cy="160" r="6" fill="none" stroke="#1a237e" stroke-width="2"/>
-  <rect x="38" y="146" width="4" height="6" fill="#1a237e"/>
-  <rect x="38" y="168" width="4" height="6" fill="#1a237e"/>
-  <rect x="26" y="158" width="6" height="4" fill="#1a237e"/>
-  <rect x="48" y="158" width="6" height="4" fill="#1a237e"/>
-  
-  <!-- Bottom Right: Community (People holding hands) -->
-  <circle cx="150" cy="153" r="4" fill="#1a237e"/>
-  <circle cx="170" cy="153" r="4" fill="#1a237e"/>
-  <line x1="150" y1="157" x2="150" y2="167" stroke="#1a237e" stroke-width="2"/>
-  <line x1="170" y1="157" x2="170" y2="167" stroke="#1a237e" stroke-width="2"/>
-  <line x1="145" y1="162" x2="155" y2="162" stroke="#1a237e" stroke-width="2"/>
-  <line x1="165" y1="162" x2="175" y2="162" stroke="#1a237e" stroke-width="2"/>
-  <path d="M 155 162 Q 160 158 165 162" stroke="#1a237e" stroke-width="2" fill="none"/>
-  
-  <!-- Center star for excellence -->
-  <path d="M 100 50 L 103 58 L 111 58 L 105 63 L 107 71 L 100 66 L 93 71 L 95 63 L 89 58 L 97 58 Z" 
-        fill="#ff6f00" stroke="#ffa040" stroke-width="1"/>
+  <!-- Subtle geometric accent lines -->
+  <path d="M 50 65 L 55 70 M 145 70 L 150 65" 
+        stroke="#ffa040" stroke-width="2" stroke-linecap="round"/>
 </svg>
