@@ -1,4 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Dark mode functionality
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  const darkModeIcon = document.getElementById("dark-mode-icon");
+
+  // Check for saved dark mode preference
+  function initializeDarkMode() {
+    if (!darkModeToggle || !darkModeIcon) return;
+    
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-mode");
+      darkModeIcon.textContent = "☀️";
+    } else {
+      darkModeIcon.textContent = "🌙";
+    }
+  }
+
+  // Toggle dark mode
+  function toggleDarkMode() {
+    if (!darkModeToggle || !darkModeIcon) return;
+    
+    document.body.classList.toggle("dark-mode");
+    const isDarkMode = document.body.classList.contains("dark-mode");
+    
+    // Update icon
+    darkModeIcon.textContent = isDarkMode ? "☀️" : "🌙";
+    
+    // Save preference
+    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+  }
+
+  // Add event listener
+  if (darkModeToggle && darkModeIcon) {
+    darkModeToggle.addEventListener("click", toggleDarkMode);
+    // Initialize dark mode on page load
+    initializeDarkMode();
+  }
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
