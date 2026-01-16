@@ -532,8 +532,14 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     // Create difficulty badge if difficulty is specified
+    const difficultyClassMap = {
+      "Beginner": "beginner",
+      "Intermediate": "intermediate",
+      "Advanced": "advanced"
+    };
+    const difficultyClass = difficultyClassMap[details.difficulty] || details.difficulty.toLowerCase().replace(/\s+/g, '-');
     const difficultyBadge = details.difficulty
-      ? `<span class="difficulty-badge difficulty-${details.difficulty.toLowerCase().replace(/\s+/g, '-')}">${details.difficulty}</span>`
+      ? `<span class="difficulty-badge difficulty-${difficultyClass}">${details.difficulty}</span>`
       : "";
 
     // Create capacity indicator
