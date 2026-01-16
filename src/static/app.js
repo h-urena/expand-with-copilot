@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let searchQuery = "";
   let currentDay = "";
   let currentTimeRange = "";
-  let currentDifficulty = "";
+  let currentDifficulty = null; // null = show all, "" = show only no-difficulty, "Beginner/etc" = show that level
 
   // Authentication state
   let currentUser = null;
@@ -70,7 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize difficulty filter
     const activeDifficultyFilter = document.querySelector(".difficulty-filter.active");
     if (activeDifficultyFilter) {
-      currentDifficulty = activeDifficultyFilter.dataset.difficulty;
+      const value = activeDifficultyFilter.dataset.difficulty;
+      currentDifficulty = value === "all" ? null : value;
     }
   }
 
@@ -434,7 +435,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Apply difficulty filter
-      if (currentDifficulty) {
+      if (currentDifficulty === null) {
+        // No difficulty filter - show all activities
+      } else if (currentDifficulty === "") {
+        // "All Levels" - show only activities WITHOUT a difficulty specified
+        if (details.difficulty) {
+          return;
+        }
+      } else {
         // If a specific difficulty is selected, only show activities with that difficulty
         if (details.difficulty !== currentDifficulty) {
           return;
@@ -671,7 +679,8 @@ document.addEventListener("DOMContentLoaded", () => {
       button.classList.add("active");
 
       // Update current difficulty filter and display filtered activities
-      currentDifficulty = button.dataset.difficulty;
+      const value = button.dataset.difficulty;
+      currentDifficulty = value === "all" ? null : value;
       displayFilteredActivities();
     });
   });
