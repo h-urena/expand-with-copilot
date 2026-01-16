@@ -570,16 +570,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       </div>
       <div class="share-buttons">
-        <button class="share-button twitter" data-activity="${name}" data-platform="twitter" title="Share on Twitter">
+        <button class="share-button twitter" data-activity="${name}" data-platform="twitter" title="Share on Twitter" aria-label="Share on X (formerly Twitter)">
           𝕏
         </button>
-        <button class="share-button facebook" data-activity="${name}" data-platform="facebook" title="Share on Facebook">
+        <button class="share-button facebook" data-activity="${name}" data-platform="facebook" title="Share on Facebook" aria-label="Share on Facebook">
           f
         </button>
-        <button class="share-button linkedin" data-activity="${name}" data-platform="linkedin" title="Share on LinkedIn">
+        <button class="share-button linkedin" data-activity="${name}" data-platform="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
           in
         </button>
-        <button class="share-button email" data-activity="${name}" data-platform="email" title="Share via Email">
+        <button class="share-button email" data-activity="${name}" data-platform="email" title="Share via Email" aria-label="Share via Email">
           ✉
         </button>
       </div>
@@ -838,7 +838,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Share activity function
   function shareActivity(activityName, details, platform) {
     const activityUrl = window.location.href;
-    const activityType = getActivityType(activityName, details.description);
     const formattedSchedule = formatSchedule(details);
     
     const shareText = `Check out "${activityName}" at Mergington High School! ${details.description} - ${formattedSchedule}`;
@@ -862,7 +861,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     if (shareUrl) {
-      window.open(shareUrl, "_blank", "width=600,height=400");
+      if (platform === "email") {
+        window.location.href = shareUrl;
+      } else {
+        window.open(shareUrl, "_blank", "width=600,height=400");
+      }
     }
   }
 
