@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Check for saved dark mode preference
   function initializeDarkMode() {
-    if (!darkModeIcon) return;
+    if (!darkModeToggle || !darkModeIcon) return;
     
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Toggle dark mode
   function toggleDarkMode() {
-    if (!darkModeIcon) return;
+    if (!darkModeToggle || !darkModeIcon) return;
     
     document.body.classList.toggle("dark-mode");
     const isDarkMode = document.body.classList.contains("dark-mode");
@@ -31,12 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Add event listener
-  if (darkModeToggle) {
+  if (darkModeToggle && darkModeIcon) {
     darkModeToggle.addEventListener("click", toggleDarkMode);
+    // Initialize dark mode on page load
+    initializeDarkMode();
   }
-
-  // Initialize dark mode on page load
-  initializeDarkMode();
 
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
