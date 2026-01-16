@@ -90,7 +90,7 @@ header h2 {
   font-size: 1.2rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 767px) {
   .header-content {
     flex-direction: column;
     gap: 10px;
