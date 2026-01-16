@@ -575,7 +575,9 @@ document.addEventListener("DOMContentLoaded", () => {
       "Intermediate": "intermediate",
       "Advanced": "advanced"
     };
-    const difficultyClass = difficultyClassMap[details.difficulty] || details.difficulty.toLowerCase().replace(/\s+/g, '-');
+    const difficultyClass = details.difficulty 
+      ? (difficultyClassMap[details.difficulty] || details.difficulty.toLowerCase().replace(/\s+/g, '-'))
+      : "";
     const difficultyBadge = details.difficulty
       ? `<span class="difficulty-badge difficulty-${difficultyClass}">${details.difficulty}</span>`
       : "";
