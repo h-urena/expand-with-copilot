@@ -861,6 +861,47 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeRangeFilter,
   };
 
+  // Share widget functionality
+  const shareWidgetButtons = document.querySelectorAll(".share-widget-button");
+  
+  shareWidgetButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const platform = button.dataset.platform;
+      shareWebsite(platform);
+    });
+  });
+
+  function shareWebsite(platform) {
+    const pageUrl = window.location.href;
+    const pageTitle = "Mergington High School - Extracurricular Activities";
+    const shareText = "Check out the amazing extracurricular activities at Mergington High School! Find sports, arts, academic clubs, and more.";
+    
+    let shareUrl = "";
+    
+    switch (platform) {
+      case "twitter":
+        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}`;
+        break;
+      case "facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}&quote=${encodeURIComponent(shareText)}`;
+        break;
+      case "linkedin":
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`;
+        break;
+      case "email":
+        shareUrl = `mailto:?subject=${encodeURIComponent(pageTitle)}&body=${encodeURIComponent(shareText + "\n\n" + pageUrl)}`;
+        break;
+    }
+    
+    if (shareUrl) {
+      if (platform === "email") {
+        window.location.href = shareUrl;
+      } else {
+        window.open(shareUrl, "_blank", "width=600,height=400");
+      }
+    }
+  }
+
   // Initialize app
   checkAuthentication();
   initializeFilters();
